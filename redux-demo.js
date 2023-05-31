@@ -7,6 +7,10 @@ function counterReducer(state = { counter: 0 }, action) {
         return {
             counter: state.counter + 1
         }
+    } else if (action.type === 'decrement') {
+        return {
+            counter: state.counter - 1
+        }
     } else {
         return state
     }
@@ -25,4 +29,6 @@ function counterSubscriber() {
 store.subscribe(counterSubscriber)
 
 // type must match a function inside counterReducer to mutate the state
+store.dispatch({ type: 'increment' })
+store.dispatch({ type: 'decrement' })
 store.dispatch({ type: 'increment' })
