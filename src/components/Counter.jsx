@@ -9,6 +9,9 @@ const Counter = () => {
 	// mention name of state to access; redux sets up subscription to store
 	const counter = useSelector((state) => state.counter);
 
+	// show counter conditionally
+	const toggleCounter = useSelector((state) => state.showCounter);
+
 	function incrementHandler() {
 		// must match the action type in reducer function
 		dispatch({ type: "increment" });
@@ -23,12 +26,14 @@ const Counter = () => {
 		dispatch({ type: "decrement" });
 	}
 
-	const toggleCounterHandler = () => {};
+	const toggleCounterHandler = () => {
+		dispatch({ type: "toggle" });
+	};
 
 	return (
 		<main className={classes.counter}>
 			<h1>Redux Counter</h1>
-			<div className={classes.value}>{counter}</div>
+			{toggleCounter && <div className={classes.value}>{counter}</div>}
 			<div>
 				<button onClick={incrementHandler}>Increment</button>
 				<button onClick={increaseHandler}>+ 10</button>
