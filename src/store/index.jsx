@@ -22,3 +22,5 @@ function counterSubscriber() {
 
 // connect to store
 store.subscribe(counterSubscriber);
+
+export default store
