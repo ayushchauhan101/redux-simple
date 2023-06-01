@@ -1,44 +1,34 @@
-import { createStore } from "redux";
+import { createSlice, configureStore } from "@reduxjs/toolkit";
 
 const initialState = { counter: 0, showCounter: true };
 
-// create store actions and counter toggler
-function counterReducer(state = initialState, action) {
-	if (action.type === "increment") {
-		return {
-			counter: state.counter + 1,
-			showCounter: state.showCounter,
-		};
-	} else if (action.type === "decrement") {
-		return {
-			counter: state.counter - 1,
-			showCounter: state.showCounter,
-		};
-	} else if (action.type === "increase") {
-		return {
-			counter: state.counter + action.amount,
-			showCounter: state.showCounter,
-		};
-	} else if (action.type === "toggle") {
-		return {
-			counter: state.counter,
-			showCounter: !state.showCounter,
-		};
-	} else {
-		return state;
-	}
-}
+// create action as well as reducer
+const counterSlice = createSlice({
+	name: "counter",
+	initialState: initialState,
+	reducers: {
+		increment(state) {
+			state.counter++;
+		},
+		decrement(state) {
+			state.counter--;
+		},
+		increase(state, action) {
+			// state remains unchanged; accepting extra data from Counter
+			state.counter = state.counter + action.payload;
+		},
+		toggleCounter(state) {
+			state.showCounter = !state.showCounter;
+		},
+	},
+});
 
-// create a store
-let store = createStore(counterReducer);
+// initiate a redux store and one main reducer function
+let store = configureStore({
+	reducer: counterSlice.reducer,
+});
 
-// get store current states
-function counterSubscriber() {
-	const currentState = store.getState();
-	console.log("The counter value is: ", currentState.counter);
-}
-
-// connect to store
-store.subscribe(counterSubscriber);
+// export all created actions
+export const counterActions = counterSlice.actions;
 
 export default store;
