@@ -4,23 +4,17 @@ import { counterActions } from "../store";
 import classes from "./Counter.module.css";
 
 const Counter = () => {
-	// discpatch/triggers an action to the store
 	const dispatch = useDispatch();
 
-	// mention name of state to access; redux sets up subscription to store
-	const counter = useSelector((state) => state.counter);
+	const counter = useSelector((state) => state.counter.counter);
 
-	// show counter conditionally
-	const toggleCounter = useSelector((state) => state.showCounter);
+	const toggleCounter = useSelector((state) => state.counter.showCounter);
 
 	function incrementHandler() {
-		// must match the action type in reducer function
 		dispatch(counterActions.increment());
 	}
 
-	// send additional custom data
 	function increaseHandler() {
-		// additional sent data will be stored in payload variable
 		dispatch(counterActions.increase(10));
 	}
 
