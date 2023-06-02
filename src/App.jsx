@@ -1,21 +1,14 @@
-import { useSelector } from "react-redux";
-
-import Counter from "./components/Counter";
-import Header from "./components/Header";
-import Auth from "./components/Auth";
-import UserProfile from "./components/UserProfile";
+import Cart from './components/Cart/Cart';
+import Layout from './components/Layout/Layout';
+import Products from './components/Shop/Products';
 
 function App() {
-	// auth = named identifier (user specified)
-	const isAuth = useSelector((state) => state.auth.isAuthenticated);
-
-	return (
-		<>
-			<Header />
-			{isAuth ? <UserProfile /> : <Auth />}
-			<Counter />
-		</>
-	);
+  return (
+    <Layout>
+      <Cart />
+      <Products />
+    </Layout>
+  );
 }
 
 export default App;
